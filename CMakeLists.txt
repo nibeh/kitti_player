@@ -17,16 +17,16 @@ find_package(catkin REQUIRED COMPONENTS
 
 find_package(PCL 1.8 REQUIRED)
 find_package(Boost REQUIRED COMPONENTS thread system program_options)
-
+find_package(OpenCV REQUIRED)
 
 generate_dynamic_reconfigure_options(cfg/kitti_player.cfg)
 catkin_package(CATKIN_DEPENDS dynamic_reconfigure)
 
 include_directories(
-		${}
-  		${catkin_INCLUDE_DIRS} 
-  		${PCL_INCLUDE_DIRS}
-                ${Boost_INCLUDE_DIRS}
+  ${catkin_INCLUDE_DIRS} 
+  ${PCL_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
 )
 
 link_directories(${PCL_LIBRARY_DIRS})
@@ -34,7 +34,7 @@ add_definitions(${PCL_DEFINITIONS})
 
 add_executable(kitti_player src/kitti_player.cpp)
 
-target_link_libraries(kitti_player ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(kitti_player ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${Boost_LIBRARIES} ${OpenCV_LIBS})
 
 
 #Add all files in subdirectories of the project in
